@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
-enum menuPages : String {
+enum menuPages : String, CaseIterable {
     case cameras = "Камеры"
     case doors = "Двери"
 }
 
 class configs {
+    
+    public let baseURL = "http://cars.cprogroup.ru/api/rubetek"
     
     static var shared: configs = {
             let config = configs()
@@ -21,7 +24,11 @@ class configs {
     
     
     private init() {}
+    
+    public func start(vc : UIViewController) {
+    }
 }
+
 
 extension configs: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {

@@ -14,12 +14,12 @@
 		F54D1B1126B8128000C56A19 /* storageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B1026B8128000C56A19 /* storageProvider.swift */; };
 		F54D1B1626B8131300C56A19 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = F54D1B1526B8131300C56A19 /* RxCocoa */; };
 		F54D1B1826B8131300C56A19 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F54D1B1726B8131300C56A19 /* RxSwift */; };
-		F54D1B1D26B8174300C56A19 /* UIGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B1C26B8174300C56A19 /* UIGenerator.swift */; };
 		F54D1B2126B819FD00C56A19 /* pageSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B2026B819FD00C56A19 /* pageSegmentedController.swift */; };
 		F5791FBC26B81ECF00866641 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FBB26B81ECF00866641 /* Alamofire */; };
 		F5791FBF26B822A500866641 /* errorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5791FBE26B822A500866641 /* errorProvider.swift */; };
 		F5791FC426B82FBD00866641 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC326B82FBD00866641 /* Realm */; };
 		F5791FC626B82FBD00866641 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC526B82FBD00866641 /* RealmSwift */; };
+		F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57AC86D26B93AD500DF50B4 /* APIRouter.swift */; };
 		F5D4880126B7DE02003D2CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D4880026B7DE02003D2CC0 /* AppDelegate.swift */; };
 		F5D4880326B7DE02003D2CC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D4880226B7DE02003D2CC0 /* SceneDelegate.swift */; };
 		F5D4880826B7DE02003D2CC0 /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D4880626B7DE02003D2CC0 /* main.storyboard */; };
@@ -34,9 +34,9 @@
 		F54D1B0226B8109300C56A19 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		F54D1B0C26B8127100C56A19 /* networkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkProvider.swift; sourceTree = "<group>"; };
 		F54D1B1026B8128000C56A19 /* storageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = storageProvider.swift; sourceTree = "<group>"; };
-		F54D1B1C26B8174300C56A19 /* UIGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGenerator.swift; sourceTree = "<group>"; };
 		F54D1B2026B819FD00C56A19 /* pageSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageSegmentedController.swift; sourceTree = "<group>"; };
 		F5791FBE26B822A500866641 /* errorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorProvider.swift; sourceTree = "<group>"; };
+		F57AC86D26B93AD500DF50B4 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		F5D487FD26B7DE02003D2CC0 /* rubetekTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rubetekTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D4880026B7DE02003D2CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D4880226B7DE02003D2CC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,29 +82,45 @@
 		F54D1B0126B8108200C56A19 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				F54D1B0C26B8127100C56A19 /* networkProvider.swift */,
-				F5791FBE26B822A500866641 /* errorProvider.swift */,
-				F54D1B1026B8128000C56A19 /* storageProvider.swift */,
-				F54D1B0B26B8125B00C56A19 /* Network models */,
+				F57AC87126B93B8200DF50B4 /* Error */,
+				F57AC87026B93B7100DF50B4 /* Storage */,
+				F54D1B0B26B8125B00C56A19 /* Network */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		F54D1B0B26B8125B00C56A19 /* Network models */ = {
+		F54D1B0B26B8125B00C56A19 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F54D1B0C26B8127100C56A19 /* networkProvider.swift */,
 				F54D1B0226B8109300C56A19 /* models.swift */,
+				F57AC86D26B93AD500DF50B4 /* APIRouter.swift */,
 			);
-			path = "Network models";
+			path = Network;
 			sourceTree = "<group>";
 		};
 		F54D1B2326B81A0500C56A19 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				F54D1B1C26B8174300C56A19 /* UIGenerator.swift */,
 				F54D1B2026B819FD00C56A19 /* pageSegmentedController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		F57AC87026B93B7100DF50B4 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F54D1B1026B8128000C56A19 /* storageProvider.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		F57AC87126B93B8200DF50B4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F5791FBE26B822A500866641 /* errorProvider.swift */,
+			);
+			name = Error;
 			sourceTree = "<group>";
 		};
 		F5D487F426B7DE02003D2CC0 = {
@@ -264,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5D4881626B7E09C003D2CC0 /* configs.swift in Sources */,
+				F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */,
 				F54D1B2126B819FD00C56A19 /* pageSegmentedController.swift in Sources */,
 				F54D1B1126B8128000C56A19 /* storageProvider.swift in Sources */,
 				F54D1B0D26B8127100C56A19 /* networkProvider.swift in Sources */,
@@ -271,7 +288,6 @@
 				F54D1AFB26B80CC900C56A19 /* detailsViewController.swift in Sources */,
 				F5791FBF26B822A500866641 /* errorProvider.swift in Sources */,
 				F54D1B0326B8109300C56A19 /* models.swift in Sources */,
-				F54D1B1D26B8174300C56A19 /* UIGenerator.swift in Sources */,
 				F5D4880126B7DE02003D2CC0 /* AppDelegate.swift in Sources */,
 				F5D4880326B7DE02003D2CC0 /* SceneDelegate.swift in Sources */,
 			);

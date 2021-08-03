@@ -1,22 +1,12 @@
 //
-//  networkProvider.swift
+//  APIRouter.swift
 //  rubetekTest
 //
-//  Created by Vlad on 02.08.2021.
+//  Created by Vlad on 03.08.2021.
 //
 
 import Foundation
 import Alamofire
-
-class networkProvider {
-    
-    static func getDoors (completion: @escaping (Result<doorList, AFError>) -> Void) {
-        let jsonDecoder = JSONDecoder()
-        AF.request(APIRouter.getDoorsList).responseDecodable(decoder : jsonDecoder) { (response : DataResponse <doorList, AFError>) in
-            completion(response.result)
-        }
-    }
-}
 
 enum APIRouter: URLRequestConvertible {
     
@@ -39,11 +29,10 @@ enum APIRouter: URLRequestConvertible {
         urlRequest.httpMethod = HTTPMethod.get.rawValue
         
         do {
-            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: [], options: [])
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
         } catch {
             throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
         }
-        
         return urlRequest
     }
 }

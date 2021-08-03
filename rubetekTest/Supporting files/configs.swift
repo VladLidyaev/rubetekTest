@@ -15,18 +15,17 @@ enum menuPages : String, CaseIterable {
 
 class configs {
     
-    public let baseURL = "http://cars.cprogroup.ru/api/rubetek"
+    public let baseURL = "https://cars.cprogroup.ru/api/rubetek"
+    public var activeLineAnimationTime : TimeInterval = 0.2
+    
     
     static var shared: configs = {
-            let config = configs()
-            return config
-        }()
+        let config = configs()
+        return config
+    }()
     
     
     private init() {}
-    
-    public func start(vc : UIViewController) {
-    }
 }
 
 

@@ -10,12 +10,14 @@ import UIKit
 class homeViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pageController: pageSegmentedController!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkProvider.getDoors{ result in
+        networkProvider.getCameras{ result in
             switch result {
             case .success(let articles):
                 print("Success")

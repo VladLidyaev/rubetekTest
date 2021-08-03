@@ -26,7 +26,7 @@ struct door : Codable {
 
 struct camerasList : Codable {
     let success : Bool?
-    let data : camerasInfo
+    let data : camerasInfo?
 }
 
 struct camerasInfo : Codable {

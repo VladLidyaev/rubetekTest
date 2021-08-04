@@ -10,16 +10,61 @@ import UIKit
 @IBDesignable
 class pageSegmentedController : UIControl {
     
-    private let conf = configs.shared
-    private var actualIndex : Int = 0
-    private var buttons : [UIButton] = []
+    private var conf = configs.shared
     private var selectorView = UIView()
-    private let selectorViewHeight : CGFloat = 5
+    private var bindingView : UIScrollView? = nil
+    private var swipeIsEnable : Bool = false
+    
+    public private(set) var actualIndex : Int = 0
+    public private(set) var buttons : [UIButton] = []
+    
+    @IBInspectable var selectorHeight: CGFloat = 3 {
+        didSet { self.layoutSubviews() }
+    }
+    
+    @IBInspectable var selectorColor: UIColor = .blue {
+        didSet { self.layoutSubviews() }
+    }
+    
+    @IBInspectable var textColor: UIColor = .black {
+        didSet { self.layoutSubviews() }
+    }
+    
+    @IBInspectable var pageTitleFontSize: CGFloat = 10 {
+        didSet { self.layoutSubviews() }
+    }
+    
+    
     
     override func layoutSubviews() {
         preparingButton()
         preparingSelectorView()
         preparingStackView()
+    }
+    
+    
+    public func setBindingView(view : UIScrollView) {
+        
+        self.bindingView = view
+    }
+    
+    public func changePage(toPage: Int) {
+        
+        guard !swipeIsEnable else { return }
+        guard 0 <= toPage && toPage <= buttons.count-1 else { return }
+        let newButton = buttons[toPage]
+        
+        for (buttonIndex, button) in self.buttons.enumerated() {
+            if actualIndex != buttonIndex && button == newButton {
+                
+                self.actualIndex = buttonIndex
+                
+                let selectorPosition = self.frame.width / CGFloat(menuPages.allCases.count) * CGFloat(buttonIndex)
+                UIView.animate(withDuration: TimeInterval(conf.selectorAnimationTime)) {
+                    self.selectorView.frame.origin.x = selectorPosition
+                }
+            }
+        }
     }
     
     private func preparingStackView() {
@@ -33,14 +78,15 @@ class pageSegmentedController : UIControl {
     
     private func preparingSelectorView() {
         
-        let backgroundSectionView = UIView(frame: CGRect(x: .zero, y: self.frame.height - selectorViewHeight, width: self.frame.width, height: selectorViewHeight))
-        backgroundSectionView.backgroundColor = .gray
-        self.addSubview(backgroundSectionView)
+        let backgroundSectionLayer = CAGradientLayer()
+        backgroundSectionLayer.frame = CGRect(x: .zero, y: self.frame.height - selectorHeight, width: self.frame.width, height: selectorHeight)
+        backgroundSectionLayer.colors = [UIColor.black.withAlphaComponent(0.05).cgColor, UIColor.clear.cgColor]
+        self.layer.addSublayer(backgroundSectionLayer)
         
         let sectionWidth = self.frame.width / CGFloat(menuPages.allCases.count)
-        selectorView = UIView(frame: CGRect(x: .zero, y: self.frame.height - selectorViewHeight, width: sectionWidth, height: selectorViewHeight))
-        selectorView.layer.cornerRadius = selectorViewHeight/2
-        selectorView.backgroundColor = .red
+        selectorView = UIView(frame: CGRect(x: .zero, y: self.frame.height - selectorHeight, width: sectionWidth, height: selectorHeight))
+        selectorView.layer.cornerRadius = selectorHeight/2
+        selectorView.backgroundColor = self.selectorColor
         self.addSubview(selectorView)
     }
     
@@ -53,26 +99,36 @@ class pageSegmentedController : UIControl {
         }
         
         menuPages.allCases.forEach { (page) in
-            let button = UIButton(type: .system)
+            let button = UIButton(type: .custom)
             button.setTitle(page.rawValue, for: .normal)
+            button.titleLabel?.font = button.titleLabel?.font.withSize(pageTitleFontSize)
             button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            button.setTitleColor(.black, for: .normal)
+            button.setTitleColor(self.textColor, for: .normal)
             buttons.append(button)
         }
-        buttons.first?.setTitleColor(.red, for: .normal)
+    }
+    
+    private func changeBindingView(newIndex : Int) {
+        
+        guard bindingView != nil else { return }
+        self.bindingView!.setContentOffset(CGPoint(x: CGFloat(newIndex)*UIScreen.main.bounds.width, y: .zero), animated: true)
     }
     
     @objc private func buttonTapped(_ sender: UIButton) {
-        for (buttonIndex, button) in buttons.enumerated() {
-            button.setTitleColor(.black, for: .normal)
-            if button == sender {
+
+        for (buttonIndex, button) in self.buttons.enumerated() {
+            if actualIndex != buttonIndex && button == sender {
+                
+                self.swipeIsEnable = true
+                self.actualIndex = buttonIndex
+                self.changeBindingView(newIndex: buttonIndex)
                 
                 let selectorPosition = self.frame.width / CGFloat(menuPages.allCases.count) * CGFloat(buttonIndex)
                 
-                UIView.animate(withDuration: conf.activeLineAnimationTime) {
-                    
+                UIView.animate(withDuration: TimeInterval(conf.selectorAnimationTime)) {
                     self.selectorView.frame.origin.x = selectorPosition
-                    button.setTitleColor(.red, for: .normal)
+                } completion: { (_) in
+                    self.swipeIsEnable = false
                 }
             }
         }

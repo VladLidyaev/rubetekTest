@@ -16,8 +16,10 @@ enum menuPages : String, CaseIterable {
 class configs {
     
     public let baseURL = "https://cars.cprogroup.ru/api/rubetek"
-    public var activeLineAnimationTime : TimeInterval = 0.2
+    public var selectorAnimationTime : TimeInterval = 0.2
     
+    public let cameraCellId = "cameraCell"
+    public let doorCellId = "doorCell"
     
     static var shared: configs = {
         let config = configs()

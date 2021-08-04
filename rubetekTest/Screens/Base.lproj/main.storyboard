@@ -21,7 +21,19 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcT-QN-ysj">
                                         <rect key="frame" x="0.0" y="0.0" width="828" height="678"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rI6-2b-ApC" customClass="pagesView" customModule="rubetekTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="828" height="678"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="rI6-2b-ApC" firstAttribute="leading" secondItem="hcT-QN-ysj" secondAttribute="leading" id="5Pc-yh-G5V"/>
+                                            <constraint firstAttribute="bottom" secondItem="rI6-2b-ApC" secondAttribute="bottom" id="L7L-p4-5i2"/>
+                                            <constraint firstAttribute="trailing" secondItem="rI6-2b-ApC" secondAttribute="trailing" id="VCO-Fn-O3n"/>
+                                            <constraint firstItem="rI6-2b-ApC" firstAttribute="top" secondItem="hcT-QN-ysj" secondAttribute="top" id="xC6-cp-MNh"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -38,7 +50,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66R-Jp-c7P">
                                 <rect key="frame" x="0.0" y="44" width="414" height="140"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUU-yT-vZg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мой дом" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUU-yT-vZg">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -46,13 +58,28 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiE-ex-ZGV" customClass="pageSegmentedController" customModule="rubetekTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="80" width="414" height="60"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="WKT-Ny-xVE"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="pageTitleColor">
+                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectorColor">
+                                                <color key="value" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="selectorHeight">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="pageTitleFontSize">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="jUU-yT-vZg" firstAttribute="top" secondItem="66R-Jp-c7P" secondAttribute="top" id="3Jv-de-h4E"/>
                                     <constraint firstAttribute="height" constant="140" id="KWB-nG-Jf2"/>
@@ -66,7 +93,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tJt-7p-p3e"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="66R-Jp-c7P" firstAttribute="leading" secondItem="tJt-7p-p3e" secondAttribute="leading" id="55v-zJ-GPv"/>
                             <constraint firstItem="aGw-ID-IHj" firstAttribute="leading" secondItem="tJt-7p-p3e" secondAttribute="leading" id="MLN-3S-jcX"/>
@@ -78,7 +105,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentView" destination="hcT-QN-ysj" id="pq6-LX-Nte"/>
+                        <outlet property="customPagesView" destination="rI6-2b-ApC" id="D7P-gu-oXX"/>
                         <outlet property="pageController" destination="jiE-ex-ZGV" id="zge-yg-b83"/>
                         <outlet property="scrollView" destination="aGw-ID-IHj" id="dJb-CB-t1R"/>
                         <outlet property="titleLabel" destination="jUU-yT-vZg" id="hwW-cF-f5z"/>
@@ -97,13 +124,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="7ah-Nl-Odz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="b8I-m9-a2l"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCU-Ar-VIn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1003" y="71"/>
+            <point key="canvasLocation" x="1928" y="71"/>
         </scene>
     </scenes>
     <resources>

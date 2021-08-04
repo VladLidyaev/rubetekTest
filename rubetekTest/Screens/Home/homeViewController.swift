@@ -7,25 +7,43 @@
 
 import UIKit
 
-class homeViewController: UIViewController {
+struct room {
+    var header : String
+    var items : [camera]
+}
+
+class homeViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pageController: pageSegmentedController!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var customPagesView: pagesView!
+    
+    private let conf = configs.shared
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        preparingUI()
         
-        networkProvider.getCameras{ result in
-            switch result {
-            case .success(let articles):
-                print("Success")
-                print(articles)
-            case .failure(let error):
-                print("Failed")
-                print(error.localizedDescription)
-            }
-        }
+        let sp = storageProvider()
+        sp.setData()
+    }
+    
+    
+    
+    private func preparingUI() {
+        
+        self.pageController.setBindingView(view: self.scrollView)
+        self.scrollView.delegate = self
+        self.scrollView.isPagingEnabled = true
+        self.scrollView.showsHorizontalScrollIndicator = false
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        self.pageController.changePage(toPage: Int(pageIndex))
     }
 }

@@ -18,7 +18,7 @@ struct door : Codable {
     let name : String?
     let snapshot : String?
     let room : String?
-    let id : Int?
+    let id : Int
     let favorites : Bool?
 }
 
@@ -38,7 +38,7 @@ struct camera : Codable {
     let name : String?
     let snapshot : String?
     let room : String?
-    let id : Int?
+    let id : Int
     let favorites : Bool?
     let rec : Bool?
 }

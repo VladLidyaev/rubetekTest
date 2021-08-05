@@ -11,21 +11,30 @@ import Alamofire
 
 class networkProvider {
     
-    public static func getDoors (completion: @escaping (Result<doorList, AFError>) -> Void) {
+    static var shared: networkProvider = {
+        let provider = networkProvider()
+        return provider
+    }()
+    
+    private init() {}
+    
+    
+    
+    public func getDoors (completion: @escaping (Result<doorListCodable, AFError>) -> Void) {
         let jsonDecoder = JSONDecoder()
-        AF.request(APIRouter.getDoorsList).responseDecodable(decoder : jsonDecoder) { (response : DataResponse <doorList, AFError>) in
+        AF.request(APIRouter.getDoorsList).responseDecodable(decoder : jsonDecoder) { (response : DataResponse <doorListCodable, AFError>) in
             completion(response.result)
         }
     }
     
-    public static func getCameras (completion: @escaping (Result<camerasList, AFError>) -> Void) {
+    public func getCameras (completion: @escaping (Result<camerasListCodable, AFError>) -> Void) {
         let jsonDecoder = JSONDecoder()
-        AF.request(APIRouter.getCamerasList).responseDecodable(decoder : jsonDecoder) { (response : DataResponse <camerasList, AFError>) in
+        AF.request(APIRouter.getCamerasList).responseDecodable(decoder : jsonDecoder) { (response : DataResponse <camerasListCodable, AFError>) in
             completion(response.result)
         }
     }
     
-    public func getImage (imageURL: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+    public func getImage (imageURL: String, completion: @escaping (Result<Data, Error>) -> Void) {
         
         AF.request(imageURL, method: HTTPMethod.get).response { response in
             switch response.result {
@@ -35,5 +44,11 @@ class networkProvider {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+extension networkProvider: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }

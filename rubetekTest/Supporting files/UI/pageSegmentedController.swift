@@ -16,6 +16,7 @@ class pageSegmentedController : UIControl {
     private var swipeIsEnable : Bool = false
     
     public private(set) var actualIndex : Int = 0
+    
     public private(set) var buttons : [UIButton] = []
     
     @IBInspectable var selectorHeight: CGFloat = 3 {
@@ -84,7 +85,7 @@ class pageSegmentedController : UIControl {
         self.layer.addSublayer(backgroundSectionLayer)
         
         let sectionWidth = self.frame.width / CGFloat(menuPages.allCases.count)
-        selectorView = UIView(frame: CGRect(x: .zero, y: self.frame.height - selectorHeight, width: sectionWidth, height: selectorHeight))
+        selectorView = UIView(frame: CGRect(x: CGFloat(self.actualIndex)*sectionWidth, y: self.frame.height - selectorHeight, width: sectionWidth, height: selectorHeight))
         selectorView.layer.cornerRadius = selectorHeight/2
         selectorView.backgroundColor = self.selectorColor
         self.addSubview(selectorView)

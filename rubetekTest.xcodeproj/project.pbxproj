@@ -10,7 +10,6 @@
 		F513249226BA7B81006CCD0E /* pagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F513249126BA7B81006CCD0E /* pagesView.swift */; };
 		F54D1AF226B808AF00C56A19 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1AF126B808AF00C56A19 /* homeViewController.swift */; };
 		F54D1AFB26B80CC900C56A19 /* detailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1AF926B80CC900C56A19 /* detailsViewController.swift */; };
-		F54D1B0326B8109300C56A19 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B0226B8109300C56A19 /* models.swift */; };
 		F54D1B0D26B8127100C56A19 /* networkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B0C26B8127100C56A19 /* networkProvider.swift */; };
 		F54D1B1126B8128000C56A19 /* storageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54D1B1026B8128000C56A19 /* storageProvider.swift */; };
 		F54D1B1626B8131300C56A19 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = F54D1B1526B8131300C56A19 /* RxCocoa */; };
@@ -25,11 +24,18 @@
 		F56FC9CA26BAF03600118EA8 /* cameraRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9C926BAF03600118EA8 /* cameraRealm.swift */; };
 		F56FC9CD26BAF04C00118EA8 /* doorRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9CC26BAF04C00118EA8 /* doorRealm.swift */; };
 		F56FC9D126BAF06200118EA8 /* roomDoorRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9D026BAF06200118EA8 /* roomDoorRealm.swift */; };
+		F56FC9DA26BB2EC100118EA8 /* cameraCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9D926BB2EC100118EA8 /* cameraCellModel.swift */; };
+		F56FC9DD26BB31C900118EA8 /* modelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9DC26BB31C900118EA8 /* modelConverter.swift */; };
+		F56FC9E026BB31FE00118EA8 /* doorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9DF26BB31FE00118EA8 /* doorCellModel.swift */; };
+		F56FC9E326BB345700118EA8 /* cameraCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9E226BB345700118EA8 /* cameraCodable.swift */; };
+		F56FC9E626BB346200118EA8 /* doorCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56FC9E526BB346200118EA8 /* doorCodable.swift */; };
 		F5791FBC26B81ECF00866641 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FBB26B81ECF00866641 /* Alamofire */; };
 		F5791FBF26B822A500866641 /* errorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5791FBE26B822A500866641 /* errorProvider.swift */; };
 		F5791FC426B82FBD00866641 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC326B82FBD00866641 /* Realm */; };
 		F5791FC626B82FBD00866641 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC526B82FBD00866641 /* RealmSwift */; };
 		F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57AC86D26B93AD500DF50B4 /* APIRouter.swift */; };
+		F5D3848D26BB40A200C4007F /* cameraSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D3848C26BB40A200C4007F /* cameraSectionModel.swift */; };
+		F5D3849026BB40AF00C4007F /* doorSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D3848F26BB40AF00C4007F /* doorSectionModel.swift */; };
 		F5D4880126B7DE02003D2CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D4880026B7DE02003D2CC0 /* AppDelegate.swift */; };
 		F5D4880326B7DE02003D2CC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D4880226B7DE02003D2CC0 /* SceneDelegate.swift */; };
 		F5D4880826B7DE02003D2CC0 /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D4880626B7DE02003D2CC0 /* main.storyboard */; };
@@ -43,7 +49,6 @@
 		F513249126BA7B81006CCD0E /* pagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pagesView.swift; sourceTree = "<group>"; };
 		F54D1AF126B808AF00C56A19 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
 		F54D1AF926B80CC900C56A19 /* detailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailsViewController.swift; sourceTree = "<group>"; };
-		F54D1B0226B8109300C56A19 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		F54D1B0C26B8127100C56A19 /* networkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkProvider.swift; sourceTree = "<group>"; };
 		F54D1B1026B8128000C56A19 /* storageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = storageProvider.swift; sourceTree = "<group>"; };
 		F54D1B2026B819FD00C56A19 /* pageSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageSegmentedController.swift; sourceTree = "<group>"; };
@@ -55,8 +60,15 @@
 		F56FC9C926BAF03600118EA8 /* cameraRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraRealm.swift; sourceTree = "<group>"; };
 		F56FC9CC26BAF04C00118EA8 /* doorRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorRealm.swift; sourceTree = "<group>"; };
 		F56FC9D026BAF06200118EA8 /* roomDoorRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roomDoorRealm.swift; sourceTree = "<group>"; };
+		F56FC9D926BB2EC100118EA8 /* cameraCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraCellModel.swift; sourceTree = "<group>"; };
+		F56FC9DC26BB31C900118EA8 /* modelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelConverter.swift; sourceTree = "<group>"; };
+		F56FC9DF26BB31FE00118EA8 /* doorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorCellModel.swift; sourceTree = "<group>"; };
+		F56FC9E226BB345700118EA8 /* cameraCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraCodable.swift; sourceTree = "<group>"; };
+		F56FC9E526BB346200118EA8 /* doorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorCodable.swift; sourceTree = "<group>"; };
 		F5791FBE26B822A500866641 /* errorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorProvider.swift; sourceTree = "<group>"; };
 		F57AC86D26B93AD500DF50B4 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		F5D3848C26BB40A200C4007F /* cameraSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraSectionModel.swift; sourceTree = "<group>"; };
+		F5D3848F26BB40AF00C4007F /* doorSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorSectionModel.swift; sourceTree = "<group>"; };
 		F5D487FD26B7DE02003D2CC0 /* rubetekTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rubetekTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D4880026B7DE02003D2CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D4880226B7DE02003D2CC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +116,7 @@
 		F54D1B0126B8108200C56A19 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				F56FC9DC26BB31C900118EA8 /* modelConverter.swift */,
 				F57AC87126B93B8200DF50B4 /* Error */,
 				F57AC87026B93B7100DF50B4 /* Storage */,
 				F54D1B0B26B8125B00C56A19 /* Network */,
@@ -114,8 +127,8 @@
 		F54D1B0B26B8125B00C56A19 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F56FC9E926BB349C00118EA8 /* Models */,
 				F54D1B0C26B8127100C56A19 /* networkProvider.swift */,
-				F54D1B0226B8109300C56A19 /* models.swift */,
 				F57AC86D26B93AD500DF50B4 /* APIRouter.swift */,
 			);
 			path = Network;
@@ -162,11 +175,31 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F56FC9D826BB2EA500118EA8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F56FC9D926BB2EC100118EA8 /* cameraCellModel.swift */,
+				F56FC9DF26BB31FE00118EA8 /* doorCellModel.swift */,
+				F5D3848C26BB40A200C4007F /* cameraSectionModel.swift */,
+				F5D3848F26BB40AF00C4007F /* doorSectionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F56FC9E926BB349C00118EA8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F56FC9E226BB345700118EA8 /* cameraCodable.swift */,
+				F56FC9E526BB346200118EA8 /* doorCodable.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F57AC87026B93B7100DF50B4 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				F56FC9C526BAEFE700118EA8 /* Models */,
 				F54D1B1026B8128000C56A19 /* storageProvider.swift */,
+				F56FC9C526BAEFE700118EA8 /* Models */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -241,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				F54D1AF126B808AF00C56A19 /* homeViewController.swift */,
+				F56FC9D826BB2EA500118EA8 /* Model */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -336,19 +370,25 @@
 				F56FC9B826BAD4E600118EA8 /* cameraCell.swift in Sources */,
 				F56FC9CA26BAF03600118EA8 /* cameraRealm.swift in Sources */,
 				F56FC9D126BAF06200118EA8 /* roomDoorRealm.swift in Sources */,
+				F56FC9E326BB345700118EA8 /* cameraCodable.swift in Sources */,
 				F5D4881626B7E09C003D2CC0 /* configs.swift in Sources */,
 				F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */,
 				F54D1B2126B819FD00C56A19 /* pageSegmentedController.swift in Sources */,
 				F54D1B1126B8128000C56A19 /* storageProvider.swift in Sources */,
+				F5D3848D26BB40A200C4007F /* cameraSectionModel.swift in Sources */,
 				F54D1B0D26B8127100C56A19 /* networkProvider.swift in Sources */,
 				F54D1AF226B808AF00C56A19 /* homeViewController.swift in Sources */,
 				F513249226BA7B81006CCD0E /* pagesView.swift in Sources */,
 				F54D1AFB26B80CC900C56A19 /* detailsViewController.swift in Sources */,
+				F56FC9DD26BB31C900118EA8 /* modelConverter.swift in Sources */,
 				F5791FBF26B822A500866641 /* errorProvider.swift in Sources */,
-				F54D1B0326B8109300C56A19 /* models.swift in Sources */,
+				F56FC9E026BB31FE00118EA8 /* doorCellModel.swift in Sources */,
+				F56FC9E626BB346200118EA8 /* doorCodable.swift in Sources */,
 				F5E9DA7926BABFA500BF70C7 /* extensionUIView.swift in Sources */,
 				F56FC9CD26BAF04C00118EA8 /* doorRealm.swift in Sources */,
 				F5D4880126B7DE02003D2CC0 /* AppDelegate.swift in Sources */,
+				F56FC9DA26BB2EC100118EA8 /* cameraCellModel.swift in Sources */,
+				F5D3849026BB40AF00C4007F /* doorSectionModel.swift in Sources */,
 				F5D4880326B7DE02003D2CC0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,11 +21,14 @@ class configs {
     public let cameraCellId = "cameraCell"
     public let doorCellId = "doorCell"
     
+    public let defaultName = "No name"
+    public let defaultImage = UIImage(systemName: "questionmark.circle")!
+    public let defaulrRoom = "No room"
+    
     static var shared: configs = {
         let config = configs()
         return config
     }()
-    
     
     private init() {}
 }

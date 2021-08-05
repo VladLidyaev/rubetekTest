@@ -7,19 +7,20 @@
 
 import UIKit
 
+@IBDesignable
 class cameraCell: UITableViewCell {
-
-    @IBOutlet weak var testLabel: UILabel!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var bottomIcon: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
     
+    public func initFromModel(data : cameraCellModel) {
+        self.mainImageView.image = data.snapshot
+        self.titleLabel.text = data.name
+    }
 }

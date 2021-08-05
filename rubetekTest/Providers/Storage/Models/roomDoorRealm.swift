@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import Realm
 import RealmSwift
 
 class roomDoorRealm : Object {
     
-    @objc dynamic var name = ""
+    @objc dynamic var name : String? = nil
     let doors = List<doorRealm>()
     
-    convenience init(_ name : String) {
+    convenience init(_ name : String? = nil) {
         self.init()
         self.name = name
     }

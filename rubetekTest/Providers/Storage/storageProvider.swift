@@ -25,19 +25,39 @@ class storageProvider {
     }
     
     
-    
-    public func getDoorSection(completion: @escaping (Result<[doorSectionModel], Error>) -> Void) {
+    public func setFavorite(id: Int) {
         
         let realmDataBase = try! Realm()
-        var storageResult : [roomDoorRealm] = []
-        let test = realmDataBase.objects(roomDoorRealm.self)
-        test.forEach { (element) in
-            storageResult.append(element)
+        guard let element = realmDataBase.objects(doorRealm.self).filter({ $0.id == id }).first else { return }
+        DispatchQueue.main.async {
+            do {
+                let realmDataBase = try! Realm()
+                try realmDataBase.safeWrite({
+                    element.favorites = true
+                })
+            } catch let error {
+                print(error)
+                return
+            }
         }
+    }
+    
+//    public func
+    
+    public func getDoorSection(update : Bool, completion: @escaping (Result<[doorSectionModel], Error>) -> Void) {
         
-        guard storageResult.isEmpty else {
-            completion(.success(converter.doorRoom(realmData: storageResult)))
-            return
+        if !update {
+            let realmDataBase = try! Realm()
+            var storageResult : [roomDoorRealm] = []
+            let test = realmDataBase.objects(roomDoorRealm.self)
+            test.forEach { (element) in
+                storageResult.append(element)
+            }
+            
+            guard storageResult.isEmpty else {
+                completion(.success(converter.roomDoorRealmToDoorSectionModel(realmData: storageResult)))
+                return
+            }
         }
         
         self.updateAndGetDoorSection { (result) in
@@ -51,18 +71,20 @@ class storageProvider {
     }
     
     
-    public func getCameraSection(completion: @escaping (Result<[cameraSectionModel], Error>) -> Void) {
+    public func getCameraSection(update : Bool, completion: @escaping (Result<[cameraSectionModel], Error>) -> Void) {
         
-        let realmDataBase = try! Realm()
-        var storageResult : [roomCameraRealm] = []
-        let test = realmDataBase.objects(roomCameraRealm.self)
-        test.forEach { (element) in
-            storageResult.append(element)
-        }
-        
-        guard storageResult.isEmpty else {
-            completion(.success(converter.cameraRoom(realmData: storageResult)))
-            return
+        if !update {
+            let realmDataBase = try! Realm()
+            var storageResult : [roomCameraRealm] = []
+            let test = realmDataBase.objects(roomCameraRealm.self)
+            test.forEach { (element) in
+                storageResult.append(element)
+            }
+            
+            guard storageResult.isEmpty else {
+                completion(.success(converter.roomCameraRealmToCameraSectionModel(realmData: storageResult)))
+                return
+            }
         }
         
         self.updateAndGetCameraSection { (result) in
@@ -88,16 +110,20 @@ class storageProvider {
                         return
                     }
                     
-                    completion(.success(self.converter.doorRoom(codableData: data)))
-                    let dataRealm : [roomDoorRealm] = self.converter.doorRoom(codableData: data)
-                    DispatchQueue.main.async {
-                        do {
-                            let realmDataBase = try! Realm()
-                            try realmDataBase.safeWrite({
-                                realmDataBase.add(dataRealm)
-                            })
-                        } catch let error {
-                            completion(.failure(error))
+                    self.converter.doorListCodableToDoorSectionModel(codableData: data) { (result) in
+                        completion(.success(result))
+                    }
+                    
+                    self.converter.doorListCodableToRoomDoorRealm(codableData: data) { (result) in
+                        DispatchQueue.main.async {
+                            do {
+                                let realmDataBase = try! Realm()
+                                try realmDataBase.safeWrite({
+                                    realmDataBase.add(result)
+                                })
+                            } catch let error {
+                                completion(.failure(error))
+                            }
                         }
                     }
                 }
@@ -120,17 +146,20 @@ class storageProvider {
                         return
                     }
                     
-                    completion(.success(self.converter.cameraRoom(codableData: data)))
-                    let dataRealm : [roomCameraRealm] = self.converter.cameraRoom(codableData: data)
+                    self.converter.cameraListCodableToCameraSectionModel(codableData: data) { (result) in
+                        completion(.success(result))
+                    }
                     
-                    DispatchQueue.main.async {
-                        do {
-                            let realmDataBase = try! Realm()
-                            try realmDataBase.safeWrite({
-                                realmDataBase.add(dataRealm)
-                            })
-                        } catch let error {
-                            completion(.failure(error))
+                    self.converter.cameraListCodableToRoomCameraRealm(codableData: data) { (result) in
+                        DispatchQueue.main.async {
+                            do {
+                                let realmDataBase = try! Realm()
+                                try realmDataBase.safeWrite({
+                                    realmDataBase.add(result)
+                                })
+                            } catch let error {
+                                completion(.failure(error))
+                            }
                         }
                     }
                 }

@@ -34,6 +34,8 @@
 		F5791FC426B82FBD00866641 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC326B82FBD00866641 /* Realm */; };
 		F5791FC626B82FBD00866641 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F5791FC526B82FBD00866641 /* RealmSwift */; };
 		F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57AC86D26B93AD500DF50B4 /* APIRouter.swift */; };
+		F5B8D66626BCF74500187A25 /* cornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B8D66526BCF74500187A25 /* cornerRadius.swift */; };
+		F5B8D66D26BD050C00187A25 /* customTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B8D66C26BD050C00187A25 /* customTableView.swift */; };
 		F5D3848D26BB40A200C4007F /* cameraSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D3848C26BB40A200C4007F /* cameraSectionModel.swift */; };
 		F5D3849026BB40AF00C4007F /* doorSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D3848F26BB40AF00C4007F /* doorSectionModel.swift */; };
 		F5D4880126B7DE02003D2CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D4880026B7DE02003D2CC0 /* AppDelegate.swift */; };
@@ -67,6 +69,8 @@
 		F56FC9E526BB346200118EA8 /* doorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorCodable.swift; sourceTree = "<group>"; };
 		F5791FBE26B822A500866641 /* errorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorProvider.swift; sourceTree = "<group>"; };
 		F57AC86D26B93AD500DF50B4 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		F5B8D66526BCF74500187A25 /* cornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cornerRadius.swift; sourceTree = "<group>"; };
+		F5B8D66C26BD050C00187A25 /* customTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTableView.swift; sourceTree = "<group>"; };
 		F5D3848C26BB40A200C4007F /* cameraSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraSectionModel.swift; sourceTree = "<group>"; };
 		F5D3848F26BB40AF00C4007F /* doorSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doorSectionModel.swift; sourceTree = "<group>"; };
 		F5D487FD26B7DE02003D2CC0 /* rubetekTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rubetekTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +146,8 @@
 				F54D1B2026B819FD00C56A19 /* pageSegmentedController.swift */,
 				F513249126BA7B81006CCD0E /* pagesView.swift */,
 				F5E9DA7826BABFA500BF70C7 /* extensionUIView.swift */,
+				F5B8D66526BCF74500187A25 /* cornerRadius.swift */,
+				F5B8D66C26BD050C00187A25 /* customTableView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -375,11 +381,13 @@
 				F57AC86E26B93AD500DF50B4 /* APIRouter.swift in Sources */,
 				F54D1B2126B819FD00C56A19 /* pageSegmentedController.swift in Sources */,
 				F54D1B1126B8128000C56A19 /* storageProvider.swift in Sources */,
+				F5B8D66626BCF74500187A25 /* cornerRadius.swift in Sources */,
 				F5D3848D26BB40A200C4007F /* cameraSectionModel.swift in Sources */,
 				F54D1B0D26B8127100C56A19 /* networkProvider.swift in Sources */,
 				F54D1AF226B808AF00C56A19 /* homeViewController.swift in Sources */,
 				F513249226BA7B81006CCD0E /* pagesView.swift in Sources */,
 				F54D1AFB26B80CC900C56A19 /* detailsViewController.swift in Sources */,
+				F5B8D66D26BD050C00187A25 /* customTableView.swift in Sources */,
 				F56FC9DD26BB31C900118EA8 /* modelConverter.swift in Sources */,
 				F5791FBF26B822A500866641 /* errorProvider.swift in Sources */,
 				F56FC9E026BB31FE00118EA8 /* doorCellModel.swift in Sources */,

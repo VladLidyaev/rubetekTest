@@ -17,7 +17,7 @@ class cameraRealm : Object {
     @objc dynamic var favorites = false
     @objc dynamic var rec = false
     
-    convenience init(_ data : cameraCodable, snapshotData : Data? = nil) {
+    convenience init(_ data : cameraCodable, snapshotData : Data?) {
         self.init()
         self.id = data.id
         self.snapshot = snapshotData

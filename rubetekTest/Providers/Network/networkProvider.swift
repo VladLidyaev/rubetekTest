@@ -36,7 +36,7 @@ class networkProvider {
     
     public func getImage (imageURL: String, completion: @escaping (Result<Data, Error>) -> Void) {
         
-        AF.request(imageURL, method: HTTPMethod.get).response { response in
+        AF.request(imageURL, method: .get).response { response in
             switch response.result {
             case .success(let responseData):
                 completion(.success(responseData!))

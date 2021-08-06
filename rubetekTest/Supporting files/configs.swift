@@ -24,6 +24,7 @@ class configs {
     public let defaultName = "No name"
     public let defaultImage = UIImage(systemName: "questionmark.circle")!
     public let defaulrRoom = "No room"
+    public let cornerRadius : CGFloat = 10
     
     static var shared: configs = {
         let config = configs()
@@ -31,6 +32,17 @@ class configs {
     }()
     
     private init() {}
+    
+    public func getPageByIndex(index : Int) -> menuPages? {
+        switch index {
+        case 0:
+            return .cameras
+        case 1:
+            return . doors
+        default:
+            return nil
+        }
+    }
 }
 
 

@@ -51,6 +51,7 @@ class pageSegmentedController : UIControl {
     
     public func changePage(toPage: Int) {
         
+        guard toPage != actualIndex else { return }
         guard !swipeIsEnable else { return }
         guard 0 <= toPage && toPage <= buttons.count-1 else { return }
         let newButton = buttons[toPage]

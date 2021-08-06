@@ -11,6 +11,7 @@ import UIKit
 class modelConverter {
     
     private let conf = configs.shared
+    private let baseQueue = DispatchQueue(label: "storageProvider.imageDownload", qos: .background, attributes: .concurrent)
     
     static var shared: modelConverter = {
         let converter = modelConverter()
@@ -21,57 +22,78 @@ class modelConverter {
     
     
     
-    public func doorRoom(codableData : doorListCodable) -> [roomDoorRealm] {
+    public func doorListCodableToRoomDoorRealm(codableData : doorListCodable, completion: @escaping ([roomDoorRealm]) -> Void) {
         
-        guard let doorArray = codableData.data else {
-            return  []
-        }
-        
-        var roomArray : [roomDoorRealm] = []
-        self.getDoorDictionary(data: doorArray).forEach { (element) in
-            
-            var realmArray : [doorRealm] = []
-            element.value.forEach { (doorCodableModel) in
-                realmArray.append(self.door(codableModel: doorCodableModel))
+        baseQueue.async {
+            guard let doorArray = codableData.data else {
+                completion([])
+                return
             }
-            let room = roomDoorRealm(element.key)
-            room.doors.append(objectsIn: realmArray)
-            roomArray.append(room)
+            
+            let group = DispatchGroup()
+            var roomArray : [roomDoorRealm] = []
+            self.getDoorDictionary(data: doorArray).forEach { (element) in
+                
+                var realmArray : [doorRealm] = []
+                element.value.forEach { (doorCodableModel) in
+                    group.enter()
+                    self.doorCodableToDoorRealm(codableModel: doorCodableModel) { (doorRealm) in
+                        realmArray.append(doorRealm)
+                        group.leave()
+                    }
+                }
+                group.wait()
+                let room = roomDoorRealm(element.key)
+                room.doors.append(objectsIn: realmArray)
+                roomArray.append(room)
+            }
+            group.notify(queue: self.baseQueue) {
+                completion(roomArray)
+            }
         }
-        return roomArray
     }
     
-    public func doorRoom(codableData : doorListCodable) -> [doorSectionModel] {
+    public func doorListCodableToDoorSectionModel(codableData : doorListCodable, completion: @escaping ([doorSectionModel]) -> Void) {
         
-        guard let doorArray = codableData.data else {
-            return  []
-        }
-        
-        var sectionArray : [doorSectionModel] = []
-        self.getDoorDictionary(data: doorArray).forEach { (element) in
-            
-            var cellArray : [doorCellModel] = []
-            element.value.forEach { (doorCodableModel) in
-                cellArray.append(self.door(codableModel: doorCodableModel))
+        baseQueue.async {
+            guard let doorArray = codableData.data else {
+                completion([])
+                return
             }
             
-            if element.key == nil {
-                sectionArray.append(doorSectionModel(header: conf.defaulrRoom, items: cellArray))
-            } else {
-                sectionArray.append(doorSectionModel(header: element.key!, items: cellArray))
+            let group = DispatchGroup()
+            var sectionArray : [doorSectionModel] = []
+            self.getDoorDictionary(data: doorArray).forEach { (element) in
+                
+                var cellArray : [doorCellModel] = []
+                element.value.forEach { (doorCodableModel) in
+                    group.enter()
+                    self.doorCodableToDoorCellModel(codableModel: doorCodableModel) { (doorCellModel) in
+                        cellArray.append(doorCellModel)
+                        group.leave()
+                    }
+                }
+                group.wait()
+                if element.key == nil {
+                    sectionArray.append(doorSectionModel(header: self.conf.defaulrRoom, items: cellArray))
+                } else {
+                    sectionArray.append(doorSectionModel(header: element.key!, items: cellArray))
+                }
+            }
+            group.notify(queue: self.baseQueue) {
+                completion(sectionArray.sorted { $0.header < $1.header })
             }
         }
-        return sectionArray
     }
     
-    public func doorRoom(realmData : [roomDoorRealm]) -> [doorSectionModel] {
+    public func roomDoorRealmToDoorSectionModel(realmData : [roomDoorRealm]) -> [doorSectionModel] {
         
         var sectionArray : [doorSectionModel] = []
         realmData.forEach { (roomDoorRealm) in
             
             var cellModelArray : [doorCellModel] = []
             roomDoorRealm.doors.forEach { (door) in
-                cellModelArray.append(self.door(realmModel: door))
+                cellModelArray.append(self.doorRealmToDoorCellModel(realmModel: door))
             }
             
             if roomDoorRealm.name == nil {
@@ -80,62 +102,83 @@ class modelConverter {
                 sectionArray.append(doorSectionModel(header: roomDoorRealm.name!, items: cellModelArray))
             }
         }
-        return sectionArray
+        return sectionArray.sorted { $0.header < $1.header }
     }
     
     
     
-    public func cameraRoom(codableData : camerasListCodable) -> [roomCameraRealm] {
+    public func cameraListCodableToRoomCameraRealm(codableData : camerasListCodable, completion: @escaping ([roomCameraRealm]) -> Void) {
         
-        guard let cameraArray = codableData.data?.cameras else {
-            return  []
-        }
-        
-        var roomArray : [roomCameraRealm] = []
-        self.getCameraDictionary(data: cameraArray).forEach { (element) in
-            
-            var realmArray : [cameraRealm] = []
-            element.value.forEach { (cameraCodableModel) in
-                realmArray.append(self.camera(codableModel: cameraCodableModel))
+        baseQueue.async {
+            guard let cameraArray = codableData.data?.cameras else {
+                completion([])
+                return
             }
-            let room = roomCameraRealm(element.key)
-            room.cameras.append(objectsIn: realmArray)
-            roomArray.append(room)
+            
+            let group = DispatchGroup()
+            var roomArray : [roomCameraRealm] = []
+            self.getCameraDictionary(data: cameraArray).forEach { (element) in
+                
+                var realmArray : [cameraRealm] = []
+                element.value.forEach { (cameraCodableModel) in
+                    group.enter()
+                    self.cameraCodableToCameraRealm(codableModel: cameraCodableModel) { (cameraRealm) in
+                        realmArray.append(cameraRealm)
+                        group.leave()
+                    }
+                }
+                group.wait()
+                let room = roomCameraRealm(element.key)
+                room.cameras.append(objectsIn: realmArray)
+                roomArray.append(room)
+            }
+            group.notify(queue: self.baseQueue) {
+                completion(roomArray)
+            }
         }
-        return roomArray
     }
     
-    public func cameraRoom(codableData : camerasListCodable) -> [cameraSectionModel] {
+    public func cameraListCodableToCameraSectionModel(codableData : camerasListCodable, completion: @escaping ([cameraSectionModel]) -> Void) {
         
-        guard let cameraArray = codableData.data?.cameras else {
-            return  []
-        }
-        
-        var sectionArray : [cameraSectionModel] = []
-        self.getCameraDictionary(data: cameraArray).forEach { (element) in
-            
-            var cellArray : [cameraCellModel] = []
-            element.value.forEach { (cameraCodableModel) in
-                cellArray.append(self.camera(codableModel: cameraCodableModel))
+        baseQueue.async {
+            guard let cameraArray = codableData.data?.cameras else {
+                completion([])
+                return
             }
             
-            if element.key == nil {
-                sectionArray.append(cameraSectionModel(header: conf.defaulrRoom, items: cellArray))
-            } else {
-                sectionArray.append(cameraSectionModel(header: element.key!, items: cellArray))
+            let group = DispatchGroup()
+            var sectionArray : [cameraSectionModel] = []
+            self.getCameraDictionary(data: cameraArray).forEach { (element) in
+                
+                var cellArray : [cameraCellModel] = []
+                element.value.forEach { (cameraCodableModel) in
+                    group.enter()
+                    self.cameraCodableToCameraCellModel(codableModel: cameraCodableModel) { (cameraCellModel) in
+                        cellArray.append(cameraCellModel)
+                        group.leave()
+                    }
+                }
+                group.wait()
+                if element.key == nil {
+                    sectionArray.append(cameraSectionModel(header: self.conf.defaulrRoom, items: cellArray))
+                } else {
+                    sectionArray.append(cameraSectionModel(header: element.key!, items: cellArray))
+                }
+            }
+            group.notify(queue: self.baseQueue) {
+                completion(sectionArray.sorted { $0.header < $1.header })
             }
         }
-        return sectionArray
     }
     
-    public func cameraRoom(realmData : [roomCameraRealm]) -> [cameraSectionModel] {
+    public func roomCameraRealmToCameraSectionModel(realmData : [roomCameraRealm]) -> [cameraSectionModel] {
         
         var sectionArray : [cameraSectionModel] = []
         realmData.forEach { (roomCameraRealm) in
             
             var cellModelArray : [cameraCellModel] = []
             roomCameraRealm.cameras.forEach { (camera) in
-                cellModelArray.append(self.camera(realmModel: camera))
+                cellModelArray.append(self.cameraRealmToCameraCellModel(realmModel: camera))
             }
             
             if roomCameraRealm.name == nil {
@@ -144,7 +187,7 @@ class modelConverter {
                 sectionArray.append(cameraSectionModel(header: roomCameraRealm.name!, items: cellModelArray))
             }
         }
-        return sectionArray
+        return sectionArray.sorted { $0.header < $1.header }
     }
     
     
@@ -177,21 +220,25 @@ class modelConverter {
         return doorDictionary
     }
     
-    private func door(codableModel : doorCodable) -> doorRealm {
-        let realmModel = doorRealm(codableModel)
-        return realmModel
+    
+    
+    private func doorCodableToDoorRealm(codableModel : doorCodable, completion: @escaping (doorRealm) -> Void) {
+        self.getImageByURL(url: codableModel.snapshot, optional: true) { (image) in
+            completion(doorRealm(codableModel, snapshotData: image?.pngData()))
+        }
     }
     
-    private func door(codableModel : doorCodable) -> doorCellModel {
-        let cellModel = doorCellModel(id: codableModel.id,
-                                      name: codableModel.name ?? conf.defaultName,
-                                      snapshot: self.getImageByURL(url: codableModel.snapshot, optional: true),
-                                      room: codableModel.room ?? conf.defaulrRoom,
-                                      favorites: codableModel.favorites ?? false)
-        return cellModel
+    private func doorCodableToDoorCellModel(codableModel : doorCodable, completion: @escaping (doorCellModel) -> Void) {
+        self.getImageByURL(url: codableModel.snapshot, optional: true) { (image) in
+            completion(doorCellModel(id: codableModel.id,
+                                     name: codableModel.name ?? self.conf.defaultName,
+                                     snapshot: image,
+                                     room: codableModel.room ?? self.conf.defaulrRoom,
+                                     favorites: codableModel.favorites ?? false))
+        }
     }
     
-    private func door(realmModel : doorRealm) -> doorCellModel {
+    private func doorRealmToDoorCellModel(realmModel : doorRealm) -> doorCellModel {
         let cellModel = doorCellModel(id: realmModel.id,
                                       name: realmModel.name ?? conf.defaultName,
                                       snapshot: self.getImageFromData(data: realmModel.snapshot, optional: true),
@@ -202,22 +249,24 @@ class modelConverter {
     
     
     
-    private func camera(codableModel : cameraCodable) -> cameraRealm {
-        let realmModel = cameraRealm(codableModel)
-        return realmModel
+    private func cameraCodableToCameraRealm(codableModel : cameraCodable, completion: @escaping (cameraRealm) -> Void) {
+        self.getImageByURL(url: codableModel.snapshot, optional: false) { (image) in
+            completion(cameraRealm(codableModel, snapshotData: image!.pngData()!))
+        }
     }
     
-    private func camera(codableModel : cameraCodable) -> cameraCellModel {
-        let cellModel = cameraCellModel(id: codableModel.id,
-                                        name: codableModel.name ?? conf.defaultName,
-                                        snapshot: self.getImageByURL(url: codableModel.snapshot, optional: false)!,
-                                        room: codableModel.room ?? conf.defaulrRoom,
-                                        favorites: codableModel.favorites ?? false,
-                                        rec: codableModel.rec ?? false)
-        return cellModel
+    private func cameraCodableToCameraCellModel(codableModel : cameraCodable, completion: @escaping (cameraCellModel) -> Void) {
+        self.getImageByURL(url: codableModel.snapshot, optional: false) { (image) in
+            completion(cameraCellModel(id: codableModel.id,
+                                       name: codableModel.name ?? self.conf.defaultName,
+                                       snapshot: image!,
+                                       room: codableModel.room ?? self.conf.defaulrRoom,
+                                       favorites: codableModel.favorites ?? false,
+                                       rec: codableModel.rec ?? false))
+        }
     }
     
-    private func camera(realmModel : cameraRealm) -> cameraCellModel {
+    private func cameraRealmToCameraCellModel(realmModel : cameraRealm) -> cameraCellModel {
         let cellModel = cameraCellModel(id: realmModel.id,
                                         name: realmModel.name ?? conf.defaultName,
                                         snapshot: self.getImageFromData(data: realmModel.snapshot, optional: false)!,
@@ -227,29 +276,27 @@ class modelConverter {
         return cellModel
     }
     
-    private func getImageByURL(url : String?, optional : Bool) -> UIImage? {
+    private func getImageByURL(url : String?, optional : Bool, completion: @escaping (UIImage?) -> Void) {
+        
         
         guard let url = url else {
             if optional {
-                return nil
+                completion(nil)
             } else {
-                return conf.defaultImage
+                completion(conf.defaultImage)
             }
+            return
         }
         
-        let semaphore = DispatchSemaphore(value: 1)
-        var image = UIImage()
         networkProvider.shared.getImage(imageURL: url) { (result) in
             switch result {
             case .success(let data):
-                image = UIImage(data: data, scale: 1) ?? self.conf.defaultImage
+                completion(UIImage(data: data, scale: 1) ?? self.conf.defaultImage)
+                break
             case .failure(_):
-                image = self.conf.defaultImage
+                completion(self.conf.defaultImage)
             }
-            semaphore.signal()
         }
-        semaphore.wait()
-        return image
     }
     
     private func getImageFromData(data : Data?, optional : Bool) -> UIImage? {
